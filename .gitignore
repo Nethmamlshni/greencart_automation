@@ -1,0 +1,9 @@
+node_modules/
+
+# Test reports
+allure-results/
+allure-report/
+reports/
+
+# Selenium screenshots
+screenshots/
