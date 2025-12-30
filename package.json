@@ -11,6 +11,7 @@
     "test5": "mocha test/logout.js --reporter mocha-allure-reporter",
     "test3": "mocha test/addtocardtest.js --reporter mocha-allure-reporter",
     "test2": "mocha test/logintest.js --reporter mocha-allure-reporter",
+    "test6": "mocha test/logintest_data.js --reporter mocha-allure-reporter",
     "report": "allure generate allure-results --clean -o allure-report && allure open allure-report"
   },
   "keywords": [],

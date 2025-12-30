@@ -1,8 +1,10 @@
 import {Builder, By , until} from 'selenium-webdriver';
 import {expect} from 'chai';
 import { takescreenshort } from '../project/screenshot.js';
+import loginData from '../data/loginData.json' assert {type:'json'};
 
-describe ('User login ', function(){
+describe ('User login(Json) ', function(){
+    const{email,password} = loginData.validLogin;
 
     let drivers;
     this.timeout(300000);
@@ -29,8 +31,8 @@ describe ('User login ', function(){
         await drivers.wait(until.elementLocated(By.xpath("//span[normalize-space()='User']")),100000);
         console.log('Login form loaded successfully ');
 
-        await drivers.findElement(By.xpath("//input[@type='email' and @required]")).sendKeys('nethmamalshani10000@gmail.com');
-        await drivers.findElement(By.xpath("//input[@type='password' and @required]")).sendKeys('nethmamalshani10000@gmail.com');
+        await drivers.findElement(By.xpath("//input[@type='email' and @required]")).sendKeys(email);
+        await drivers.findElement(By.xpath("//input[@type='password' and @required]")).sendKeys(password);
         const loginBtn = await drivers.findElement(By.xpath("//form//button[normalize-space()='Login']"))
         await loginBtn.click();
 
@@ -40,8 +42,9 @@ describe ('User login ', function(){
         console.log('Login successfully');
 
     })
-
-    it ('User Login with invalid credential', async function (){
+ 
+    loginData.invalidLogin.forEach((data,index) =>{
+    it (`User Login with invalid credential ${index+1}`, async function (){
         try{
         await drivers.get('https://greencart-gs.vercel.app/');
         const displayed = await drivers.wait(until.elementLocated(By.xpath("//img[@alt='logo']")),100000);
@@ -56,8 +59,8 @@ describe ('User login ', function(){
         console.log('Login form loaded successfully ');
 
         const email = await drivers.findElement(By.xpath("//input[@type='email' and @required]"))
-        await email.sendKeys('nethmamalshani100@gmail.com');
-        await drivers.findElement(By.xpath("//input[@type='password' and @required]")).sendKeys('vsdghsvdhgvSHGD');
+        await email.sendKeys(data.email);
+        await drivers.findElement(By.xpath("//input[@type='password' and @required]")).sendKeys(data.password);
          const loginBtn = await drivers.findElement(By.xpath("//form//button[normalize-space()='Login']"))
         await loginBtn.click();
         const errormsg = await email.getAttribute("validationMessage");
@@ -75,5 +78,6 @@ describe ('User login ', function(){
         
 
     })
+})
 })
 

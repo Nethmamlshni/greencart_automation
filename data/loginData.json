@@ -1,0 +1,16 @@
+{
+    "validLogin": {
+        "email":"nethmamalshani100@gmail.com",
+        "password":"nethmamalshani100@gmail.com"
+    },
+    "invalidLogin":[
+        {
+            "email":"nethmamalshani100@gmail.com",
+            "password":"wrongpassword"
+        },
+        {
+            "email":"invalidemailformat",
+            "password":"somepassword"
+        }
+    ]
+}
